@@ -1,0 +1,86 @@
+﻿<div class="popup-dialog shipment-dialog">
+    <form method="post" asp-controller="Product" asp-action="Index">
+        <input type="text" id="id" disabled/>
+        <div class="form-group">
+            <label style="color : black;" for="name">Name</label>
+            <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label style="color : black;" for="price">Price</label>
+            <input type="text" class="form-control" id="price">
+        </div>
+        <div class="form-group">
+            <label>Service</label>
+            <input type="checkbox" class="ms-5" id="service" placeholder="Admin" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-submit">Tambah</button>
+        <a class="btn btn-danger close-button">Batal</a>
+    </form>
+</div>
+<script>
+    $(".addShipment").click(function (event) {
+        event.preventDefault();
+        $(".shipment-dialog #id").val(0);
+        $(".modal-layer").css("display", "flex");
+        $(".shipment-dialog").css("display", "block");
+    });
+
+    $(".popup-dialog form").submit(function (event) {
+        event.preventDefault();
+        var id = $(".shipment-dialog #id").val();
+        var name = $(".shipment-dialog #name").val();
+        var price = $(".shipment-dialog #price").val();
+        var service = $(".shipment-dialog #service")[0].checked;
+        let urlAction = "/Shipment/Save";
+
+        let viewModel = {
+            "shipperId" : id,
+            "name": name,
+            "price": price,
+            "service": service
+        }
+
+        $.ajax({
+            method: "POST",
+            url: urlAction,
+            data: JSON.stringify(viewModel),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                console.log(result);
+                if (result.success) {
+                    window.location.reload();
+
+                }
+            },
+
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        });
+    });
+
+    $(".btn-edit").click(function(event){
+        event.preventDefault();
+
+        let valueUrl = $(this).attr("href");
+        $.ajax({
+            url: valueUrl,
+            success: function (result) {
+                console.log(result);
+
+                document.querySelector(".shipment-dialog #id").value = result.shipperId;
+                document.querySelector(".shipment-dialog #name").value = result.name;
+                document.querySelector(".shipment-dialog #price").value = result.price;
+                document.querySelector(".shipment-dialog #service").checked = result.service;
+
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        })
+
+        $(".modal-layer").css("display", "flex");
+        $(".shipment-dialog").css("display", "block");
+
+
+    })
+</script>

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrollMarket.Web", "TrollMarket.Web\TrollMarket.Web.csproj", "{C902E819-EE2A-44DF-938D-826B4973D959}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrollMarket.DataAccess", "TrollMarket.DataAccess\TrollMarket.DataAccess.csproj", "{39357266-FE11-4FB2-BC47-86D4D480034A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrollMarket.ViewModel", "TrollMarket.ViewModel\TrollMarket.ViewModel.csproj", "{F51533EF-7C76-4F0D-B8D3-04311E484D0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrollMarket.Repository", "TrollMarket.Repository\TrollMarket.Repository.csproj", "{B02ED819-2D63-4FF9-8AB3-C0D2F759C055}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrollMarket.Utility", "TrollMarket.Utilities\TrollMarket.Utility.csproj", "{4575957C-6705-4E73-AD08-A77CC9D5D6CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrollMarket.Provider", "TrollMarket.Provider\TrollMarket.Provider.csproj", "{5A0683C1-9474-4EA8-AC91-C18EBA87416A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C902E819-EE2A-44DF-938D-826B4973D959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C902E819-EE2A-44DF-938D-826B4973D959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C902E819-EE2A-44DF-938D-826B4973D959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C902E819-EE2A-44DF-938D-826B4973D959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39357266-FE11-4FB2-BC47-86D4D480034A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39357266-FE11-4FB2-BC47-86D4D480034A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39357266-FE11-4FB2-BC47-86D4D480034A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39357266-FE11-4FB2-BC47-86D4D480034A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F51533EF-7C76-4F0D-B8D3-04311E484D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51533EF-7C76-4F0D-B8D3-04311E484D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F51533EF-7C76-4F0D-B8D3-04311E484D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F51533EF-7C76-4F0D-B8D3-04311E484D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B02ED819-2D63-4FF9-8AB3-C0D2F759C055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02ED819-2D63-4FF9-8AB3-C0D2F759C055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02ED819-2D63-4FF9-8AB3-C0D2F759C055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02ED819-2D63-4FF9-8AB3-C0D2F759C055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4575957C-6705-4E73-AD08-A77CC9D5D6CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4575957C-6705-4E73-AD08-A77CC9D5D6CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4575957C-6705-4E73-AD08-A77CC9D5D6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4575957C-6705-4E73-AD08-A77CC9D5D6CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A0683C1-9474-4EA8-AC91-C18EBA87416A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0683C1-9474-4EA8-AC91-C18EBA87416A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0683C1-9474-4EA8-AC91-C18EBA87416A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0683C1-9474-4EA8-AC91-C18EBA87416A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40348817-6DFF-4224-9163-13AC263CBE62}
+	EndGlobalSection
+EndGlobal

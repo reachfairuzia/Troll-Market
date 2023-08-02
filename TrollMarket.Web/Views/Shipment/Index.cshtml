@@ -1,0 +1,59 @@
+﻿@using TrollMarket.ViewModel.Shipment
+@model IEnumerable<ShipmentViewModel>
+
+@section modalDialog{
+    <div class="modal-layer">
+        <partial name="_AddShipment"></partial>
+        <partial name="_StopServiceDialog"></partial>
+        <partial name="_DetailDialog"></partial>
+    </div>
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $(".close-button").click(function () {
+            $(".modal-layer").removeAttr("style");
+            $(".popup-dialog").removeAttr("style");
+        });
+        console.log("print");
+    })
+</script>
+
+<div style="border : solid black 1px; margin : 10px;" class="mt-7 p-2 me-5">Shipment</div>
+
+<div style="border : solid black 1px; margin : 10px;" class="mt-2 me-5 p-4">
+
+    <a class="btn btn-secondary addShipment">Add New Shipment</a>
+
+    <table id="myTable" class="display table table-hover m-4 py-4" style="width : 90%">
+        <thead class="thead-dark">
+            <tr style="border : solid black 1px;">
+                <th class="text-center" scope="col"></th>
+                <th style="border : solid black 1px;" class="text-center" scope="col">Name</th>
+                <th style="border : solid black 1px;" class="text-center" scope="col">Price</th>
+                <th style="border : solid black 1px;" class="text-center" scope="col">Service</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        <a class="btn btn-secondary btn-edit" asp-route-id="@item.ShipperId" asp-action="Edit">Edit</a>
+                        <a class="btn btn-secondary btn-detail" asp-route-id="@item.ShipperId" asp-action="Detail">Detail</a>
+                        @if(item.Service == true)
+                        {
+                            <a class="btn btn-secondary btn-service" data-name="@item.Name" asp-route-id="@item.ShipperId" asp-action="StopService">Stop Service</a>
+                        }
+                        @if(item.Service == false){
+                            <a class="btn btn-secondary btn-service disabled">Stop Service</a>
+                        }
+                    </td>
+                    <td style="border : solid black 1px;" class="text-center">@item.Name</td>
+                    <td style="border : solid black 1px;" class="text-center">@item.Price</td>
+                    <td style="border : solid black 1px;" class="text-center">@item.ServiceStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

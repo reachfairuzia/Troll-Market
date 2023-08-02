@@ -1,0 +1,59 @@
+﻿<div class="popup-dialog detail-dialog">
+    <header>
+        <h1 style="color : black;">Detail Product</h1>
+        <button class="btn close-button">
+            <i class="fa fa-close"></i>
+        </button>
+    </header>
+
+<table>
+    <tbody>
+        <tr>
+            <td>Name :</td>
+            <td><span style="color : black;" class="productName"></span></td>
+        </tr>                         
+        <tr>                          
+            <td>Category :</td>       
+            <td><span style="color : black;" class="categoryName"></span></td>
+        </t>                         
+        <tr>                         
+            <td>Description :</td>    
+            <td><span style="color : black;" class="description"></span></td>
+        </tr>                        
+        <tr>                      
+            <td>Price :</td>         
+            <td><span style="color : black;" class="price"></span></td>
+        </tr>                       
+        <tr>                    
+            <td>Seller Name :</td>    
+            <td><span style="color : black;" class="sellerName"></span></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<script>
+
+    $(".btn-detail").click(function (event) {
+        event.preventDefault();
+
+        let valueUrl = $(this).attr("href");
+        $.ajax({
+            url: valueUrl,
+            success: function (result) {
+                console.log(result);
+
+                document.querySelector(".productName").textContent = result.productName;
+                document.querySelector(".categoryName").textContent = result.categoryName;
+                document.querySelector(".description").textContent = result.description;
+                document.querySelector(".price").textContent = result.price;
+                document.querySelector(".sellerName").textContent = result.sellerName;
+
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        })
+        $(".modal-layer").css("display", "flex");
+        $(".detail-dialog").css("display", "block");
+    });
+</script>

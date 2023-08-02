@@ -1,0 +1,49 @@
+﻿<div class="popup-dialog detail-dialog">
+    <header>
+        <h1 style="color : black;">Detail Shipment</h1>
+        <button class="btn close-button">
+            <i class="fa fa-close"></i>
+        </button>
+    </header>
+
+    <table>
+        <tbody>
+            <tr>
+                <td>Name :</td>
+                <td><span style="color : black;" class="shipName"></span></td>
+            </tr>
+            <tr>
+                <td>Price :</td>
+                <td><span style="color : black;" class="price"></span></td>
+                </t>
+            <tr>
+                <td>Service :</td>
+                <td><span style="color : black;" class="service"></span></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(".btn-detail").click(function (event) {
+        event.preventDefault();
+
+        let valueUrl = $(this).attr("href");
+        $.ajax({
+            url: valueUrl,
+            success: function (result) {
+                console.log(result);
+
+                document.querySelector(".shipName").textContent = result.name;
+                document.querySelector(".price").textContent = result.stringPrice;
+                document.querySelector(".service").textContent = result.serviceStatus;
+
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        })
+        $(".modal-layer").css("display", "flex");
+        $(".detail-dialog").css("display", "block");
+    });
+</script>

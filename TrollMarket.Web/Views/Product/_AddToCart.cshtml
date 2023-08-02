@@ -1,0 +1,41 @@
+﻿<div class="popup-dialog cart-dialog">
+    <h1 style="color : black;" class="text-center">Add To Cart</h1>
+    <form method="post" asp-controller="Product" asp-action="Index">
+        <div class="form-group">
+            <label style="color : black;" for="name">Quantity</label>
+            <input type="text" class="form-control" id="name" name="searchName" placeholder="Product Name" value="@Model.searchName">
+        </div>
+        <div class="form-group">
+            <label style="color : black;" for="shipment">Shipment</label>
+            <select class="form-control" id="shipment" name="ShipmentDropdown"></select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-submit">Tambahkan Ke Keranjang</button>
+        <a class="btn btn-danger close-button">Batal</a>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Shipment/ShipmentDropdown",
+            success: function (data) {
+                console.log(data);
+                var option = `<option value="">-- Select Shipment --</option>`;
+
+                for (var item of data) {
+                    let value = item.value;
+                    let text = item.text;
+
+                    option += `<option value="${value}">${text}</option>`;
+                    $("#shipment").html(option);
+                }
+            }
+        });
+    });
+
+    $(".btn-cart").click(function (event) {
+        event.preventDefault();
+        $(".modal-layer").css("display", "flex");
+        $(".cart-dialog").css("display", "block");
+    });
+</script>

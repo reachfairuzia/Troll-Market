@@ -1,0 +1,63 @@
+﻿<div class="popup-dialog stop-dialog">
+    <header>
+        <h1>Stop Service?</h1>
+        <a href="javascript:;" class="btn close-button">
+            <i class="fa fa-close"></i>
+        </a>
+    </header>
+
+    <div>
+        <p>Yakin stop <span class="name"></span> Service?</p>
+        <a class="btn btn-danger submit-button">Stop Service</a>
+        <a class="btn btn-secondary close-button">Cancel</a>
+    </div>
+</div>
+
+<div class="popup-dialog message-dialog">
+    <header>
+        <h1>Stop Service</h1>
+    </header>
+
+    <div>
+        <p class="message"></p>
+        <a href="javascript:;" class="btn btn-secondary btn-save text-center close-button">OK</a>
+    </div>
+</div>
+
+<script>
+    $(".btn-service").click(function (event) {
+        event.preventDefault();
+
+        //var categoryName = $(this).attr("[data-categoryName]")
+        let name = this.dataset.name;
+        let href = $(this).attr("href");
+
+        $(".stop-dialog .name").text(name);
+        $(".stop-dialog .submit-button").attr("href", href);
+
+        $(".modal-layer").css("display", "flex");
+        $(".stop-dialog").css("display", "block");
+    });
+
+    $(".submit-button").click(function (event) {
+        event.preventDefault();
+
+        let urlAction = $(this).attr("href");
+        $.ajax({
+            url: urlAction,
+            success: function (response) {
+                if (response.success) {
+                    $(".stop-dialog").removeAttr("style");
+                    $(".message-dialog").css("display", "block");
+                    $(".message-dialog .message").text(response.message);
+                }
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") },
+        });
+
+    });
+    $(".message-dialog .close-button").click(function () {
+        window.location.reload();
+    });
+</script>
