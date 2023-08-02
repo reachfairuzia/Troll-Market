@@ -21,7 +21,7 @@ namespace TrollMarket.Provider
         public List<SelectListItem> GetShipmentDropdown()
         {
             var data = ShipmentRepository.GetRepository().GetAll();
-            var dropdown = data.Select(a=> new SelectListItem
+            var dropdown = data.Select(a => new SelectListItem
             {
                 Text = a.Name,
                 Value = a.ShipperId.ToString()
@@ -44,7 +44,7 @@ namespace TrollMarket.Provider
 
         public void Save(UpsertShipmentViewModel model)
         {
-            if(model.ShipperId == 0)
+            if (model.ShipperId == 0)
             {
                 var entity = new Shipment();
                 entity.Name = model.Name;
@@ -52,7 +52,7 @@ namespace TrollMarket.Provider
                 entity.Price = model.Price;
                 ShipmentRepository.GetRepository().Insert(entity);
             }
-            else if(model.ShipperId != 0)
+            else if (model.ShipperId != 0)
             {
                 var entity = new Shipment();
                 entity.Name = model.Name;
@@ -61,7 +61,7 @@ namespace TrollMarket.Provider
                 entity.ShipperId = model.ShipperId;
                 ShipmentRepository.GetRepository().Update(entity);
             }
-            
+
         }
 
         public UpsertShipmentViewModel Edit(int id)
@@ -94,6 +94,11 @@ namespace TrollMarket.Provider
                 ServiceStatus = shipment.Service == true ? "Yes" : "No",
                 StringPrice = shipment.Price == null ? "N/A" : shipment.Price.Value.ToString("C", CultureInfo.CurrentCulture)
             };
+        }
+        public void Delete(int id)
+        {
+            var shipment = ShipmentRepository.GetRepository().GetSingle(id);
+            ShipmentRepository.GetRepository().Delete(shipment);
         }
     }
 }
