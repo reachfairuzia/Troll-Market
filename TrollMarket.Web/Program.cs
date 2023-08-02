@@ -1,7 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+//builder.Services.AddControllersWithViews();
+
+//middle-wares
+builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+object value = builder.Services.AddRazorPages().AddNewtonsoftJson();
 
 var app = builder.Build();
 

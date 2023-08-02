@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrollMarket.Repository;
+using TrollMarket.ViewModel;
 using TrollMarket.ViewModel.Products;
 
 namespace TrollMarket.Provider
@@ -19,7 +20,7 @@ namespace TrollMarket.Provider
             return _instance;
         }
 
-        private IEnumerable<ProductViewModel> getData()
+        public IEnumerable<ProductViewModel> getData()
         {
             return (from prod in ProductRepository.GetRepository().GetAll()
                     select new ProductViewModel
@@ -73,6 +74,47 @@ namespace TrollMarket.Provider
                             SellerName = prod.Seller.Name
                         }).SingleOrDefault();
             return data;
+        }
+
+
+        public JsonResultViewModel GetProductById(int id)
+        {
+            var check = ProductRepository.GetRepository().GetSingle(id);
+            if (check != null)
+            {
+                var data = (from prod in ProductRepository.GetRepository().GetAll()
+                            where prod.ProductId == id
+                            select new ProductViewModel
+                            {
+                                ProductId = prod.ProductId,
+                                CategoryName = prod.Category,
+                                Description = prod.Description,
+                                Discontinue = prod.Discontinue == true ? "Discontinue" : "Continue",
+                                Price = prod.Price,
+                                StringPrice = prod.Price == null ? "N/A" : prod.Price.Value.ToString("C2", CultureInfo.CurrentCulture),
+                                ProductName = prod.ProductName,
+                                SellerName = prod.Seller.Name
+                            }).SingleOrDefault();
+
+                var result = new JsonResultViewModel
+                {
+                    Success = true,
+                    Message = "Product Found",
+                    ReturnObject = data
+                };
+                return result;
+            }
+
+            else
+            {
+                var result = new JsonResultViewModel
+                {
+                    Success = false,
+                    Message = "Product Not Found",
+                    ReturnObject = check
+                };
+                return result;
+            }
         }
     }
 }

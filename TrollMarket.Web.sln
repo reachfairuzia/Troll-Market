@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrollMarket.Repository", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrollMarket.Utility", "TrollMarket.Utilities\TrollMarket.Utility.csproj", "{4575957C-6705-4E73-AD08-A77CC9D5D6CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrollMarket.Provider", "TrollMarket.Provider\TrollMarket.Provider.csproj", "{5A0683C1-9474-4EA8-AC91-C18EBA87416A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrollMarket.Provider", "TrollMarket.Provider\TrollMarket.Provider.csproj", "{5A0683C1-9474-4EA8-AC91-C18EBA87416A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrollMarket.API", "TrollMarket.API\TrollMarket.API.csproj", "{60E9F780-B54D-4278-AE96-535F6578CA8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5A0683C1-9474-4EA8-AC91-C18EBA87416A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A0683C1-9474-4EA8-AC91-C18EBA87416A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A0683C1-9474-4EA8-AC91-C18EBA87416A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60E9F780-B54D-4278-AE96-535F6578CA8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E9F780-B54D-4278-AE96-535F6578CA8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60E9F780-B54D-4278-AE96-535F6578CA8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60E9F780-B54D-4278-AE96-535F6578CA8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
