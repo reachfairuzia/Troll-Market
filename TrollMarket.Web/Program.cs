@@ -6,7 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 //middle-wares
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
-object value = builder.Services.AddRazorPages().AddNewtonsoftJson();
+builder.Services.AddRazorPages().AddNewtonsoftJson();
+
+builder.Services.AddAntiforgery(option => option.HeaderName = "_RequestVerificationToken");
 
 var app = builder.Build();
 

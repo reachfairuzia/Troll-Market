@@ -30,6 +30,7 @@ namespace TrollMarket.Provider
             var buyer = BuyerRepository.GetRepository().GetSingle(1);
             var result = new IndexProfileBuyerViewModel
             {
+                BuyerId = buyer.Id,
                 Name = buyer.Name,
                 Role = "Buyer",
                 Address = buyer.Address,
@@ -37,6 +38,16 @@ namespace TrollMarket.Provider
                 History = query
             };
             return result;
+        }
+
+        public void TambahDana(TopupDanaViewModel model)
+        {
+            //ambil oldbuyer
+            var oldBuyer = BuyerRepository.GetRepository().GetSingle(model.BuyerId);
+            oldBuyer.Balance += model.Dana;
+
+            //update
+            BuyerRepository.GetRepository().Update(oldBuyer);
         }
     }
 }
