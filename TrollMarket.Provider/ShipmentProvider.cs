@@ -96,28 +96,27 @@ namespace TrollMarket.Provider
                 StringPrice = shipment.Price == null ? "N/A" : shipment.Price.Value.ToString("C", CultureInfo.CurrentCulture)
             };
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            var shipment = ShipmentRepository.GetRepository().GetSingle(id);
-            ShipmentRepository.GetRepository().Delete(shipment);
+            return ShipmentRepository.GetRepository().Delete(id);
         }
 
         public JsonResultViewModel GetShipmentById(int id)
         {
             var check = ShipmentRepository.GetRepository().GetSingle(id);
-            if(check != null)
+            if (check != null)
             {
                 var data = (from ship in ShipmentRepository.GetRepository().GetAll()
-                           where ship.ShipperId == id
-                           select new ShipmentViewModel
-                           {
-                               ShipperId = ship.ShipperId,
-                               Name = ship.Name,
-                               Price = ship.Price,
-                               Service = ship.Service,
-                               StringPrice = ship.Price == null ? "N/A" : ship.Price.Value.ToString("C2", CultureInfo.CurrentCulture),
-                               ServiceStatus = ship.Service == true ? "Yes" : "No"
-                           }).SingleOrDefault();
+                            where ship.ShipperId == id
+                            select new ShipmentViewModel
+                            {
+                                ShipperId = ship.ShipperId,
+                                Name = ship.Name,
+                                Price = ship.Price,
+                                Service = ship.Service,
+                                StringPrice = ship.Price == null ? "N/A" : ship.Price.Value.ToString("C2", CultureInfo.CurrentCulture),
+                                ServiceStatus = ship.Service == true ? "Yes" : "No"
+                            }).SingleOrDefault();
                 var result = new JsonResultViewModel
                 {
                     Success = true,
