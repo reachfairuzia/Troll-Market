@@ -1,5 +1,18 @@
 ﻿@using TrollMarket.ViewModel.Buyer;
 @model IndexProfileBuyerViewModel;
+@section modalDialog{
+    <div class="modal-layer">
+        <partial name="_TopUpDana"></partial>
+    </div>
+
+    <script>
+        $(".close-button").click(function () {
+            $(".modal-layer").removeAttr("style");
+            $(".popup-tambah-dana").removeAttr("style");
+        });
+
+    </script>
+}
 
 <div class="grid-container">
     <table>
@@ -20,7 +33,7 @@
                 <td>Balance:</td>
                 <td>
                     @Model.Balance
-                    <a class="blue-button btn-tambah-dana" asp-controller="Buyer" asp-action="TopUpDana">Tambah dana</a>
+                    <a class="blue-button btn-tambah-dana" asp-controller="Buyer" asp-action="TopUpDana" asp-route-BuyerId="@Model.BuyerId">Tambah dana</a>
                 </td>
             </tr>
         </tbody>
@@ -51,3 +64,5 @@
         </tbody>
     </table>
 </div>
+
+
