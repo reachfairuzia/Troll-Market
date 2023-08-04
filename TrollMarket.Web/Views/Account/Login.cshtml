@@ -1,0 +1,56 @@
+﻿@using TrollMarket.ViewModel.Account;
+@model LoginViewModel;
+
+
+@{
+    //Layout = "_Autentikasi";
+}
+
+
+<section class="h-100 h-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card rounded-3">
+                    <div class="card-body p-4 p-md-5 ">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Login</h3>
+                        <form method="post" asp-action="Login" asp-route-returnUrl="@ViewBag.ReturnUrl" class="px-md-2">
+                            <input type="text" id="role" asp-for="Role" class="form-control w-75" value="@ViewBag.Role" hidden />
+                            <div class="form-outline mb-4 d-flex flex-row justify-content-between">
+                                <label class="form-label" for="username">Username</label>
+                                <input type="text" id="username" asp-for="Username" class="form-control w-75" />
+                                <span class="validation-message" data-for="Username"></span>
+                            </div>
+                            <div class="form-outline mb-4 d-flex flex-row justify-content-between">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" id="password" asp-for="Password" class="form-control w-75" />
+                                <span class="validation-message" data-for="Password"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-4">
+
+                                    <label class="form-label select-label">Choose Role</label>
+
+                                    <select class="select" asp-for="Role" asp-items="Model.DropdownRoles"> <option selected>--Select category</option></select>
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-outline pe-200 d-flex flex-row justify-content-between mx-5 mt-5">
+                                <button type="submit" class="btn btn-success btn-lg mb-1 btn-regist">Register</button>
+                            </div>
+                        </form>
+                        <div class="form-outline pe-200 d-flex flex-row justify-content-between mx-5 mt-5">
+                            <a asp-action="RegistAccountBuyer">Regist as Buyer</a>
+                            <a asp-action="RegistAccountSeller">Regist as Seller</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<link rel="stylesheet" href="~/style.css" />
