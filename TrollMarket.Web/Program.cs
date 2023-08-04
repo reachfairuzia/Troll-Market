@@ -1,7 +1,14 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Identity.Client;
+using TrollMarket.Provider;
+using TrollMarket.Provider.Impl;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IAccountProvider, AccountProvider>();
+
 
 //middle-wares
 builder.Services.AddControllers().AddNewtonsoftJson();
@@ -9,6 +16,16 @@ builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddRazorPages().AddNewtonsoftJson();
 
 builder.Services.AddAntiforgery(option => option.HeaderName = "_RequestVerificationToken");
+
+
+builder.Services.AddAntiforgery(option => option.HeaderName = "__RequestVerificationToken");
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                         .AddCookie(a =>
+                         {
+                             a.LoginPath = "/Account/Login";
+                             a.AccessDeniedPath = "/Account/LoginFailed";
+                         });
 
 var app = builder.Build();
 
