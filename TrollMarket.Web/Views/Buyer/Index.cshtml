@@ -1,0 +1,68 @@
+﻿@using TrollMarket.ViewModel.Buyer;
+@model IndexProfileBuyerViewModel;
+@section modalDialog{
+    <div class="modal-layer">
+        <partial name="_TopUpDana"></partial>
+    </div>
+
+    <script>
+        $(".close-button").click(function () {
+            $(".modal-layer").removeAttr("style");
+            $(".popup-tambah-dana").removeAttr("style");
+        });
+
+    </script>
+}
+
+<div class="grid-container">
+    <table>
+        <tbody>
+            <tr>
+                <td>Name:</td>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <td>Role:</td>
+                <td>@Model.Role</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>@Model.Address</td>
+            </tr>
+            <tr>
+                <td>Balance:</td>
+                <td>
+                    @Model.Balance
+                    <a class="blue-button btn-tambah-dana" asp-controller="Buyer" asp-action="TopUpDana" asp-route-BuyerId="@Model.BuyerId">Tambah dana</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <h4>My Transaction History</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Shipment</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.History)
+            {
+                <tr>
+                    <td>@row.Date</td>
+                    <td>@row.Product</td>
+                    <td>@row.Quantity</td>
+                    <td>@row.Shipment</td>
+                    <td>@row.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

@@ -13,7 +13,9 @@ builder.Services.AddSingleton<IAccountProvider, AccountProvider>();
 //middle-wares
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
-object value = builder.Services.AddRazorPages().AddNewtonsoftJson();
+builder.Services.AddRazorPages().AddNewtonsoftJson();
+
+builder.Services.AddAntiforgery(option => option.HeaderName = "_RequestVerificationToken");
 
 
 builder.Services.AddAntiforgery(option => option.HeaderName = "__RequestVerificationToken");
