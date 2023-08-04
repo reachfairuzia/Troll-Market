@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrollMarket.DataAccess.Models;
 using TrollMarket.Repository;
+using TrollMarket.ViewModel;
 using TrollMarket.ViewModel.Shipment;
 
 namespace TrollMarket.Provider
@@ -95,10 +96,45 @@ namespace TrollMarket.Provider
                 StringPrice = shipment.Price == null ? "N/A" : shipment.Price.Value.ToString("C", CultureInfo.CurrentCulture)
             };
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            var shipment = ShipmentRepository.GetRepository().GetSingle(id);
-            ShipmentRepository.GetRepository().Delete(shipment);
+            return ShipmentRepository.GetRepository().Delete(id);
+        }
+
+        public JsonResultViewModel GetShipmentById(int id)
+        {
+            var check = ShipmentRepository.GetRepository().GetSingle(id);
+            if (check != null)
+            {
+                var data = (from ship in ShipmentRepository.GetRepository().GetAll()
+                            where ship.ShipperId == id
+                            select new ShipmentViewModel
+                            {
+                                ShipperId = ship.ShipperId,
+                                Name = ship.Name,
+                                Price = ship.Price,
+                                Service = ship.Service,
+                                StringPrice = ship.Price == null ? "N/A" : ship.Price.Value.ToString("C2", CultureInfo.CurrentCulture),
+                                ServiceStatus = ship.Service == true ? "Yes" : "No"
+                            }).SingleOrDefault();
+                var result = new JsonResultViewModel
+                {
+                    Success = true,
+                    Message = "Shipment Found",
+                    ReturnObject = data
+                };
+                return result;
+            }
+            else
+            {
+                var result = new JsonResultViewModel
+                {
+                    Success = false,
+                    Message = "Shipment Not Found",
+                    ReturnObject = check
+                };
+                return result;
+            }
         }
     }
 }

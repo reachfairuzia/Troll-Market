@@ -9,8 +9,8 @@ namespace TrollMarket.Repository
 {
     public class AccountRepository : IRepository<Account>
     {
-        private static IRepository<Account> _instance = new AccountRepository();
-        public static IRepository<Account> GetRepository()
+        private static AccountRepository _instance = new AccountRepository();
+        public static AccountRepository GetRepository()
         {
             return _instance;
         }
@@ -50,6 +50,28 @@ namespace TrollMarket.Repository
         public bool Delete(object id)
         {
             throw new NotImplementedException();
+        }
+        public string GetRole(string username)
+        {
+            using (var context = new TrollMarketContext())
+            {
+                var cekAdmin = context.Accounts.SingleOrDefault(a => a.Username == username).Role;
+                return cekAdmin;
+            }
+        }
+        public bool GetIsAuthentication(string username, string password)
+        {
+            using (var context = new TrollMarketContext())
+            {
+                //var hashPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                var accountByUsername = context.Accounts.SingleOrDefault(a => (a.Username == username && a.Password == password));
+
+                if (accountByUsername != null)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
     }
 }

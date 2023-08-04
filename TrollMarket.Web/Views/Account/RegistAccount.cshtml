@@ -1,0 +1,119 @@
+﻿@using TrollMarket.ViewModel.Account;
+@model RegistAccountViewModel;
+
+<section class="h-100 h-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card rounded-3">
+                    @*  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp"
+                    class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                    alt="Sample photo">*@
+                    <div class="card-body p-4 p-md-5 ">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Info</h3>
+                        <form method="post" class="px-md-2">
+                            <input type="text" id="role" asp-for="Role" class="form-control w-75" value="@ViewBag.Role" hidden/>
+                            <div class="form-outline mb-4 d-flex flex-row justify-content-between">
+                                <label class="form-label" for="username">Username</label>
+                                <input type="text" id="username" asp-for="Username" class="form-control w-75" />
+                                <span class="validation-message" data-for="Username"></span>
+                            </div>
+                            <div class="form-outline mb-4 d-flex flex-row justify-content-between">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" id="password" asp-for="Password" class="form-control w-75" />
+                                <span class="validation-message" data-for="Password"></span>
+                            </div>
+                            <div class="form-outline mb-4 d-flex flex-row justify-content-between">
+                                <label class="form-label" for="confirmPassword">Confirm</br>Password</label>
+                                <input type="password" id="confirmPassword" class="form-control w-75" />
+                            </div>
+                            <span class="text-warning text-end" id="msgConfirmPassword"></span>
+                            </br>
+                            </br>
+                            <div class="form-outline mb-4 d-flex flex-row justify-content-between">
+                                <label class="form-label" for="name">Name</label>
+                                <input type="text" id="name" asp-for="Name" class="form-control w-75" />
+                                <span class="validation-message" data-for="Name"></span>
+                            </div>
+                            <div class="form-outline pe-200 d-flex flex-row justify-content-between">
+                                <label class="form-label" for="form3Example1q">Address</label>
+                                <textarea class="form-control w-75" asp-for="Address" id="address" rows="3"></textarea>
+                                <span class="validation-message" data-for="Address"></span>
+                            </div>
+                            <div class="form-outline pe-200 d-flex flex-row justify-content-between mx-5 mt-5">
+                                <a class="btn btn-success btn-lg mb-1 btn-regist">Register</a>
+                                <button onclick="history.back()" class="btn btn-success btn-lg mb-1">Back to login page</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $("#msgConfirmPassword").prop("disabled", true);
+
+        $(".btn-regist").click(function (event) {
+            event.preventDefault();
+
+            let urlAction = "/RegistAccount";
+            var role = $("#role").val();
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var confirmPassword = $("#confirmPassword").val();
+            var name = $("#name").val();
+            var address = $("#address").val();
+
+            let viewModel = {
+                "username": username,
+                "password": password,
+                "name": name,
+                "address": address,
+                "role":role
+            }
+
+            var token = $(`[name = "__RequestVerificationToken"]`).val();
+
+            if (password == confirmPassword) {
+
+                $("#msgConfirmPassword").text("");
+                $.ajax({
+                    method: "POST",
+                    url: urlAction,
+                    data: JSON.stringify(viewModel),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    headers: {
+                        "__RequestVerificationToken": token
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        if (result.success) {
+                            window.location.reload();
+                        window.location.href = "/Login"
+                        }
+                        generateValidationMessege(result.validation)
+                    },
+
+                    fail: function () { console.log("Fail") },
+                    error: function () { console.log("Internal Server Error") }
+                });
+            }
+            else {
+                $("#msgConfirmPassword").text("password tidak cocok, cek kembali!");
+            }
+        })
+
+        function generateValidationMessege(validations) {
+            for (let item of validations) {
+                let propertyName = item.propertyName;
+                let msg = item.messegerError;
+                $(`form [data-for=${propertyName}]`).text(msg);
+            }
+        }
+
+    });
+</script>

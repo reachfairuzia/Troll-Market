@@ -1,0 +1,84 @@
+﻿<div class="text-center popup-dialog popup-tambah-dana">
+    <h2>TOP UP</h2>
+    <form method="post" asp-action="TopUpDana">
+        <input type="hidden" class="buyerId"/>
+        <div>
+            <p>Tambah dana sebesar:</p>
+        </div>
+        <div>
+            <input name="Dana" class="saldo-dana" />
+        </div>
+        <div>
+            <button type="submit" class="blue-button">Tambah</button>
+            <a class="btn close-button">Back</a>
+        </div>
+    </form>
+</div>
+
+<script> 
+    //EDIT
+    $(".btn-tambah-dana").click(function (event) {
+        event.preventDefault();
+        $(".modal-layer").css("display", "flex");
+        $(".popup-tambah-dana").css("display", "block");
+
+        let valueUrl = $(this).attr("href");
+        //console.log(valueUrl);
+        $.ajax({
+            url: valueUrl,
+            success: function (response) {
+                //console.log(response)
+                $(".buyerId").val(response.buyerId);
+                $(".saldo-dana").val(response.dana);
+
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        });
+    });
+
+    //SAVE
+    $(".popup-tambah-dana form").submit(function (event) {
+        event.preventDefault();
+
+        var buyerId = $('.popup-tambah-dana .buyerId').val();
+        var dana = $('.popup-tambah-dana .saldo-dana').val();
+
+        let urlAction = "/Buyer/TopUpDana";
+
+        let viewModel = {
+            "buyerId": buyerId,
+            "dana": dana
+        };
+        console.log(viewModel);
+
+        var tokenHelper = '@Html.AntiForgeryToken()';
+        var token = $(tokenHelper).val();
+        console.log(token);
+
+        $.ajax({
+            method: "POST",
+            url: urlAction,
+            data: JSON.stringify(viewModel),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            headers: {
+                "_RequestVerificationToken": token
+            },
+            success: function (result) {
+                console.log(result);
+                if (result.success && result.isvalid) {
+                    $(".modal-layer").css("display", "none");
+                    $(".popup-success").css("display", "none");
+                    location.reload();
+                }
+                else {
+                    $(".modal-layer").css("display", "flex");
+                    $(".popup-failed").css("display", "block");
+                }
+            },
+            fail: function () { console.log("Fail") },
+            error: function () { console.log("Internal Server Error") }
+        });
+    });
+</script>
