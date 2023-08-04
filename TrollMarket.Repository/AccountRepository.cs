@@ -59,12 +59,12 @@ namespace TrollMarket.Repository
                 return cekAdmin;
             }
         }
-        public bool GetIsAuthentication(string username, string password)
+        public bool GetIsAuthentication(string username, string password, string role)
         {
             using (var context = new TrollMarketContext())
             {
                 //var hashPassword = BCrypt.Net.BCrypt.HashPassword(password);
-                var accountByUsername = context.Accounts.SingleOrDefault(a => (a.Username == username && a.Password == password));
+                var accountByUsername = context.Accounts.SingleOrDefault(a => (a.Username == username && a.Password == password && a.Role== role) );
 
                 if (accountByUsername != null)
                 {

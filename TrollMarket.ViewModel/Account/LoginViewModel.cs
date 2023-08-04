@@ -12,7 +12,6 @@ namespace TrollMarket.ViewModel.Account
         public string Username { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-
-        public List<SelectListItem> DropdownRoles { get; set; }
+        public List<SelectListItem> DropdownRoles { get; set; }  
     }
 }

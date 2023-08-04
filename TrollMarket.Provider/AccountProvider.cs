@@ -22,7 +22,7 @@ namespace TrollMarket.Provider
 
         public bool IsAuthentication(LoginViewModel model)
         {
-            return AccountRepository.GetRepository().GetIsAuthentication(model.Username, model.Password);
+            return AccountRepository.GetRepository().GetIsAuthentication(model.Username, model.Password , model.Role);
         }
 
         public List<SelectListItem> GetDropdownRole()

@@ -15,7 +15,6 @@
                     <div class="card-body p-4 p-md-5 ">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Login</h3>
                         <form method="post" asp-action="Login" asp-route-returnUrl="@ViewBag.ReturnUrl" class="px-md-2">
-                            <input type="text" id="role" asp-for="Role" class="form-control w-75" value="@ViewBag.Role" hidden />
                             <div class="form-outline mb-4 d-flex flex-row justify-content-between">
                                 <label class="form-label" for="username">Username</label>
                                 <input type="text" id="username" asp-for="Username" class="form-control w-75" />
@@ -31,9 +30,9 @@
                                 <div class="mb-4">
 
                                     <label class="form-label select-label">Choose Role</label>
-
-                                    <select class="select" asp-for="Role" asp-items="Model.DropdownRoles"> <option selected>--Select category</option></select>
-
+                                
+                                    <select  asp-for="Role" asp-items="Model.DropdownRoles">
+                                        <option selected>--Select Role</option>
                                     </select>
 
                                 </div>
