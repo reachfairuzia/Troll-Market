@@ -6,6 +6,7 @@
             <p>Tambah dana sebesar:</p>
         </div>
         <div>
+            <div class="validation-message" data-for="Dana"></div>
             <input name="Dana" class="saldo-dana" />
         </div>
         <div>
@@ -19,8 +20,6 @@
     //EDIT
     $(".btn-tambah-dana").click(function (event) {
         event.preventDefault();
-        $(".modal-layer").css("display", "flex");
-        $(".popup-tambah-dana").css("display", "block");
 
         let valueUrl = $(this).attr("href");
         //console.log(valueUrl);
@@ -31,6 +30,8 @@
                 $(".buyerId").val(response.buyerId);
                 $(".saldo-dana").val(response.dana);
 
+                $(".modal-layer").css("display", "flex");
+                $(".popup-tambah-dana").css("display", "block");
             },
             fail: function () { console.log("Fail") },
             error: function () { console.log("Internal Server Error") }
@@ -63,18 +64,19 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             headers: {
-                "_RequestVerificationToken": token
+                "__RequestVerificationToken": token
             },
             success: function (result) {
                 console.log(result);
-                if (result.success && result.isvalid) {
+                if (!result.isException && !result.isValidation) {
                     $(".modal-layer").css("display", "none");
                     $(".popup-success").css("display", "none");
                     location.reload();
                 }
-                else {
-                    $(".modal-layer").css("display", "flex");
-                    $(".popup-failed").css("display", "block");
+                else if (!result.isException && result.isValidation) {
+                    for (let validation of result.data) {
+                        $(`.popup-tambah-dana [data-for=${validation.propertyName}]`).text(validation.messegerError);
+                    }
                 }
             },
             fail: function () { console.log("Fail") },

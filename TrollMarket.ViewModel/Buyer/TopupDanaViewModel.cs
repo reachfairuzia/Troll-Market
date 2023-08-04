@@ -9,6 +9,7 @@ namespace TrollMarket.ViewModel.Buyer
     public class TopupDanaViewModel
     {
         public int BuyerId { get; set; }
+        [MinimalTopupValidation]
         public decimal Dana { get; set; }
     }
 }

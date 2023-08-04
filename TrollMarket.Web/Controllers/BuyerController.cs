@@ -4,7 +4,7 @@ using TrollMarket.ViewModel.Buyer;
 
 namespace TrollMarket.Web.Controllers
 {
-    public class BuyerController : Controller
+    public class BuyerController : BaseController
     {
         [HttpGet]
         public IActionResult Index()
@@ -32,17 +32,15 @@ namespace TrollMarket.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     BuyerProvider.GetProvider().TambahDana(model);
-                    return Json(new { success = true, message = "Berhasil Menyimpan", isvalid = true });
-                }
-                else
-                {
-                    return Json(new { success = false, message = "Gagal Menyimpan", isvalid = false });
+                    return Json(new { isException = false,isValidation = false , data = model});
                 }
             }
             catch
             {
-                return Json(new { success = false, message = "Exception", isvalid = false });
+                return Json(new { isException = true, message = "Exception" });
             }
+            var error = GetValidationViewModels(ModelState);
+            return Json(new { isException = false, isValidation = true, data = error});
         }
     }
 }

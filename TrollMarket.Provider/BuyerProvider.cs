@@ -58,13 +58,13 @@ namespace TrollMarket.Provider
             {
                 var data = (from hist in HistoryRepository.GetRepository().GetAll()
                             where hist.BuyerId == id
-                            select new Transac
+                            select new TransactionHistoryViewModel
                             {
                                 Date = FormatNullableDatetime(hist.PurchaseDate),
                                 Product = hist.Product.ProductName,
                                 Quantity = hist.Quantity,
                                 Shipment = hist.Shipment.Name,
-                                TotalPrice = FormatNullable(hist.TotalPrice)
+                                TotalPrice = FormatNullableDouble(hist.TotalPrice)
                             }).ToList();
                 return new JsonResultViewModel()
                 {

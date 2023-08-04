@@ -15,7 +15,7 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddRazorPages().AddNewtonsoftJson();
 
-builder.Services.AddAntiforgery(option => option.HeaderName = "_RequestVerificationToken");
+//builder.Services.AddAntiforgery(option => option.HeaderName = "_RequestVerificationToken");
 
 
 builder.Services.AddAntiforgery(option => option.HeaderName = "__RequestVerificationToken");
